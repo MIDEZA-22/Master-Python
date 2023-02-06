@@ -1,0 +1,50 @@
+{% extends 'layout.html' %} <!--Heredar toda la plantilla layout.html-->
+
+<!--Para que el titulo se muestre en la pagina, SE DEBE USAR EL BLOQUE EN EL layout.html-->
+{% block title%}
+
+    {{title}}
+
+{% endblock %}
+
+<!--Para que el contenido se muestre en la pagina, SE DEBE USAR EL BLOQUE EN EL layout.html-->
+{% block content %}
+
+    <h1 class="title">{{title}}</h1>
+
+    {% comment "Doble llave" %}
+        Interpolar una variable. Significa coger una variable que tengo dentro
+        de un metodo y mostrarla en una template.
+    {% endcomment %}
+    <p>{{mi_variable}}</p>
+
+    {% if nombre and nombre == "MIDEZA" %}
+        <p>{{nombre}}</p>
+    {% else %}
+        <strong>El nombre no existe</strong>  
+    {% endif %}
+
+    <h3>Listado de lenguajes de programación</h3>
+    <ul>
+        {% for lenguaje in lenguajes %}
+            <li>{{forloop.counter}}. {{lenguaje}} </li>
+        {% empty %}
+        <strong>NO HAY LENGUAJES QUE MOSTRAR</strong> 
+        {% endfor %}
+    </ul>
+
+    {% include 'fecha-actual.html' with saludo="Hola mundo desde index.html" only %} <!--Incluir(include) otra template(fecha-actual.html) dentro de esta template(index.html)-->
+                                      <!--Al usar el include en esta template. La nueva template herada las variables definidas en las views.py-->
+                                      <!--"with" sirve para pasar una variable a la template incluida(fecha-actual.html)-->
+                                      <!--"only" ya no permite que la nueva template herede las variables definidas en las vistas(views.py)-->
+{% endblock %}
+
+{% comment "NOTA" %}
+    {% empty %} Sirve para comprobar si algo esta vacio
+    {{forloop.first}} Sirve para sacar que elemento es primero
+    {{forloop.last}} Sirve para sacar que elemento es ultimo
+    {{forloop.counter}} Sirve para sacar el numero del elemento de manera ascendente
+    {{forloop.counter0}} Sirve para que el primer elemento empiece en 0
+    {{forloop.revcounter}} Sirve para sacar el numero del elemento de manera descendente
+    {{forloop.revcounter0}} Sirve para sacar el numero del elemento de manera descendente empezando por 0
+{% endcomment %}

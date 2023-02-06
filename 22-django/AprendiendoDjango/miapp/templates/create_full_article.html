@@ -1,0 +1,35 @@
+{% extends 'layout.html' %} <!--Heredar toda la plantilla layout.html-->
+
+<!--Para que el titulo se muestre en la pagina, SE DEBE USAR EL BLOQUE EN EL layout.html-->
+{% block title%}
+
+    Pagina de Pruebas
+
+{% endblock %}
+
+<!--Para que el contenido se muestre en la pagina, SE DEBE USAR EL BLOQUE EN EL layout.html-->
+{% block content %}
+
+    <h1 class="title">Formularios en Django</h1>
+
+    {% if  form.errors %} <!--Capturara errores en el 'form' en caso haya-->
+
+        <strong class="rojo">
+            Hay errores en el Formulario
+        </strong>
+    
+    {% endif %}
+
+    <!-- El action vacio o action="" significa que valle el formulario a la pagina donde estamos actualmente-->
+    <form action="" method="POST">
+        
+        {% csrf_token %}
+
+        {{form.as_p}} <!-- .as_p Mete cada campo de 'form' dentro de un parrafo <p></p>-->
+                      <!-- .as_ul Mete cada campo de 'form' dentro de una lista desordenada <ul></ul>-->
+
+        <input type="submit" value="Guardar"/>
+
+    </form>
+    
+{% endblock %}

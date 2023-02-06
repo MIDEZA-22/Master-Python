@@ -1,0 +1,56 @@
+{% extends 'layout.html' %} <!--Heredar toda la plantilla layout.html-->
+
+<!--Para que el titulo se muestre en la pagina, SE DEBE USAR EL BLOQUE EN EL layout.html-->
+{% block title%}
+
+Pagina de Pruebas
+
+{% endblock %}
+
+<!--Para que el contenido se muestre en la pagina, SE DEBE USAR EL BLOQUE EN EL layout.html-->
+{% block content %}
+
+<h1 class="title">Página de mi web</h1>
+<p>{{"Creado por MIDEZA"|cut:" "}}</p>
+
+<p>
+{{texto|default:"No hay nada"}}
+</p>
+
+<p>
+{{lista|join:', '}}
+</p>
+ 
+<p>
+{{lista|random}}
+</p>
+
+<p>
+{{"texto de pruebas"|length}}
+</p>
+
+<p>
+{{"texto de pruebas"|upper}}
+</p>
+
+<p>
+{{"<h1>texto</h1> <strong>pruebas</strong>"|striptags|wordcount}}
+</p>
+
+{% load filters %} <!--Cargar los filtros creados en filters.py. El filtro creado se carga en la plantilla donde se utilizara-->
+{{"MIDEZA.COM"|saludo|safe}}
+
+{% endblock %}
+
+{% comment "FILTROS EN LAS TEMPLATES" %}
+{{"Creado por MIDEZA"|cut:" "}} Sirve para quitar los espacios
+{{texto|default:"No hay nada"}} Sirve para mostrar un texto por defecto
+{{lista|first}} Sirve para mostrar el primer elemento de una lista y |last sirve para mostrar el ultimo de la lista
+{{lista|join:', '}} Sirve para mostrar los elementos no como lista sino mas ordenados y separados en este caso por una coma
+{{lista|length}} Sirve para mostrar la longitud de la lista
+{{"texto de pruebas"|length}} Sirve para sacar cuantos caracteres tiene el texto
+{{"texto de pruebas"|upper}} Sirve para convertir un texto en mayusculas y |lower para poner en minusculas
+{{lista|random}} Sirve para extraer un numero aleatorio de la lista
+{{"<h1>texto</h1> <strong>pruebas</strong>"|striptags}} Sirve para quitar las etiquetas html y mostrar como un texto normal
+{{"<h1>texto</h1> <strong>pruebas</strong>"|striptags|wordcount}} Se puede convinar filtros. |striptags Sirve para contar palabras en una frase
+{% endcomment %}

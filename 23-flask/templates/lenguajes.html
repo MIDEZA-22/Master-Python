@@ -1,0 +1,11 @@
+{% extends 'layout.html' %}
+
+{% block title %} 
+    Lenguajes
+
+    {{ super() }} <!--Hereda el contenido del "block title" original. Es decir, el "title" que esta por defecto en la "layout.html", sobrescribe a los títulos de las otras plantillas. PARA QUE NO SUCEDA ESTO SE UTILIZA super(), para que se visualicen los 2 en la pestaña de la página web-->
+{% endblock %}
+
+{% block content %}
+    <h1>Página de Lenguajes de Programación</h1> 
+{% endblock %}

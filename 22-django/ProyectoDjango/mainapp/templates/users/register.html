@@ -1,0 +1,26 @@
+{% extends 'layouts/layout.html' %}
+
+    {% block title %}
+        {{title}}
+    {% endblock %}
+
+    {% block content %} 
+        <h1>{{title}}</h1>
+
+        <form method="post" action="">
+            {% csrf_token %}
+
+            {% comment "EN CASO SE USE EL FORM POR DEFECTO UserCreationForm GUARDADO EN register_form TODO DENTRO DE views" %}
+            {{register_form.as_p}} <!--as.p muestra cada campo dentro de un parrafo-->
+            {% endcomment %}
+
+            {% for field in register_form %}
+
+                <label>{{field.label}}</label>
+                {{field}}
+
+            {% endfor %}
+
+            <input type="submit" value="Registrar" />
+        </form>
+    {% endblock %}

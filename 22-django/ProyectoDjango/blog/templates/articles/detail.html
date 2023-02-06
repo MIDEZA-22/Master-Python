@@ -1,0 +1,24 @@
+{% extends 'layouts/layout.html' %}
+
+    {% block title %}
+        {{article.title}}
+    {% endblock %}
+
+    {% block content %} 
+        {% if article.image != 'null' and article.image.url|length >= 1 %} <!--.url automaticamente me saca la url de la imagen, automaticamente detecta que es un fichero-->
+                        
+            <div class="image">
+                <img src="{{article.image.url}}"/>
+            </div>
+
+        {% endif %}
+
+        <h1 class="title">{{article.title}}</h1>
+
+        <span class="date">{{article.created_at}}</span>
+
+        <p class="content">
+            {{article.content|safe}} <!-- |safe va a interpretar lo que esta en el contenido como HTML y no como TEXTO PLANO-->
+        </p>
+
+    {% endblock %}

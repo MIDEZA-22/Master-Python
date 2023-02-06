@@ -1,0 +1,17 @@
+{% extends 'layout.html' %} <!--Heredar toda la plantilla layout.html-->
+
+<!--Para que el titulo se muestre en la pagina, SE DEBE USAR EL BLOQUE EN EL layout.html-->
+{% block title%}
+
+hola_mundo
+
+{% endblock %}
+
+<!--Para que el contenido se muestre en la pagina, SE DEBE USAR EL BLOQUE EN EL layout.html-->
+{% block content %}
+
+{{block.super}} <!--Heredar el contenido predefinido que hay en el bloque de la layout.html-->
+<h1 class="title">Hola mundo con Django</h1>
+<h3>Soy MIDEZA</h3>
+
+{% endblock %}

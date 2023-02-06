@@ -1,0 +1,65 @@
+<!DOCTYPE HTML>
+<html lang="es">
+
+    <head>
+        <meta charset="utf-8"/>
+        <title>{% block title %} | Aprendiendo Flask con MIDEZA {% endblock %}</title>
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}"/>
+    </head>
+
+    <body>   
+        <!--Cabecera de la pagina-->
+        <header>
+            <div id="logotipo"> 
+                <!--Logo Django-->
+                <img src="{{ url_for('static', filename='img/flask.png') }}" />
+                <h1>Flask con MIDEZA</h1>
+            </div>
+        </header>
+
+        <nav>
+            <ul>
+                <li>
+                    <a href="/">Inicio</a>
+                </li>
+                <li>
+                    <a href="{{ url_for('crear_coche') }}">Crear coche</a>
+                </li>
+                <li>
+                    <a href="{{ url_for('coches') }}">Listado de coches</a>
+                </li>
+                <li>
+                    <a href="{{ url_for('informacion') }}">Información</a> <!--url_for('informacion') utiliza el nombre de la función o método, NO EL NOMBRE DE LA RUTA. De esa forma aunque que se cambie el nombre de la ruta, no afectara. Ya que se esta utilizando el nombre de la función directamente-->
+                </li>
+                <li>
+                    <a href="{{ url_for('contacto') }}">Contacto</a>
+                </li>
+                <li>
+                    <a href="{{ url_for('lenguajes') }}">Lenguajes de programación</a>
+                </li>
+            </ul>    
+        </nav>
+        <!--Se crea la div para crear el efecto 3D-->
+        <div class="barra">
+            <span class="esquina-izquierda"></span> <!--span es una etiqueta vacia-->
+            <span class="relleno-barra"></span>
+            <span class="esquina-derecha"></span>
+        </div>
+
+        <div id="content"> <!--Para que layout.html se utilice siempre, es mejor crear un bloque de codigo-->
+            
+            <div class="box">
+                {% block content %} <!--Definir bloque-->
+                <strong>Contenido del bloque original</strong><!--Codigo que viene de tamplates/ En este caso es un contenido predefinido hola_mundo.html--> 
+                {% endblock %} <!--Cerrar bloque-->
+            </div>
+
+        </div>
+        
+        <footer>
+            &copy; 2022 por MIDEZA - {{date.day}}/{{date.month}}/{{date.year}} <!--date se usa porque asi se definio en el context processor dentro del "main.py"-->
+        </footer>
+
+    </body>
+
+</html>

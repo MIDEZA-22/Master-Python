@@ -1,0 +1,98 @@
+<!DOCTYPE html> 
+<html lang="es"> 
+
+<head>
+    <meta charset="utf-8" /> 
+    <!--Titulo de cada pagina DENTRO DEL BLOQUE-->
+    <title> 
+        {% block title %}
+            
+        {% endblock %}
+        | MIDEZA
+    </title>
+
+    {% load static %} 
+    <link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}">
+</head>
+
+<body>
+    <!--Cabecera de la pagina-->
+    <header>
+        <div id="logotipo"> 
+            <!--Logo Django-->
+            <img src="{% static 'images/logo.png' %}" />
+            <h1>Proyecto con Django</h1>
+        </div>
+    </header>
+
+    <nav>
+        <ul>
+            <!--Enlace de Inicio-->
+            <li>
+                <a href="{% url 'index' %}">Inicio</a>
+            </li>
+
+            <!--MOSTRAR LOS ENLACES A USUARIOS IDENTIFICADOS-->
+            {% if user.email %}
+                      
+                <!--Menu desplegable de Categorias-->
+                <li>
+                    <a href="{% url 'list_articles' %}">Categorias</a>
+                    <ul>
+                        <!--Lista de categorias para mostrarse como un menu desplegable-->
+                        {% for category in categories %} <!--Recorre la tupla y las listas que estan dentro de la tupla llamada "categories" creada en "context_processors"-->
+                            <li>
+                                <a href="{% url 'category' category.0 %}">{{category.1}}</a>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </li>
+
+                <!--Paginas creadas y mostrados en la barra de navegacion-->
+                {% for page in pages %} <!--Recorre la tupla y las listas que estan dentro de la tupla llamada "pages" creada en "context_processors"-->
+                    <li>
+                        <a href="{% url 'page' page.2 %}">{{page.1}}</a> <!--"page.1" El numero "1" indica que accedera al indice 1 de la lista, en este caso es el "title". El numero "2" indica que accedera al indice 2 de la lista, en este caso es el "slug". TODO ESTO CON RESPECTO A LA VARIABLE "pages" CREADA EN "context_processors.py".-->
+                    </li>
+                {% endfor %}
+                
+                <!--Enlace para cerrar seción-->
+                <li>
+                    <a href="{% url 'logout' %}">CERRAR SECION</a>
+                </li>
+
+            {% else %}
+
+                <!--Enlace para el registro de usuario-->
+                <li>
+                    <a href="{% url 'register' %}">Registro</a>
+                </li>
+                <!--Enlace para el logueo de usuario-->
+                <li>
+                    <a href="{% url 'login' %}">Acceso</a>
+                </li>
+                  
+            {% endif %}
+        </ul>       
+    </nav>
+    <!--Se crea la div para crear el efecto 3D-->
+    <div class="barra">
+        <span class="esquina-izquierda"></span> <!--span es una etiqueta vacia-->
+        <span class="relleno-barra"></span>
+        <span class="esquina-derecha"></span>
+    </div>
+
+    <div id="content"> <!--Para que layout.html se utilice siempre, es mejor crear un bloque de codigo-->
+        
+        <div class="box">
+            {% block content %} <!--Definir bloque-->
+               <strong>Contenido del bloque original</strong><!--Codigo que viene de tamplates/ En este caso es un contenido predefinido hola_mundo.html--> 
+            {% endblock %} <!--Cerrar bloque-->
+        </div>
+
+    </div>
+    
+    <footer>
+        &copy; 2022 por MIDEZA - {% now "d/m/Y h:m:s" %}
+    </footer>
+</body>
+</html>

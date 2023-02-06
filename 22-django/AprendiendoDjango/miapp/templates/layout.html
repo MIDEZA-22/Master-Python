@@ -1,0 +1,81 @@
+<!DOCTYPE html> <!--Para acceder a las etiquetas de la ultima version de HTML-->
+<html lang="es"> <!--Especificar el lenguaje ESPAÑOL "es"-->
+
+<head>
+    <meta charset="utf-8" /> <!--charset="utf-8" Sirve para que reconosca los caracteres especiales-->
+    <!--Titulo de cada pagina DENTRO DEL BLOQUE-->
+    <title> 
+        {% block title %}
+            
+        {% endblock %}
+        | MIDEZA
+    </title>
+
+    {% load static %} <!--Cargar static dentro de la plantilla-->
+    <link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}/"> <!--Vincular con styles.css | Utilizar la instruccion que viene en la plantilla de Django llamado "static"-->
+</head>
+
+<body>
+    <!--Cabecera de la pagina-->
+    <header>
+        <div id="logotipo">  <!--El "id" sirve para seleccionar algo que va estar solo una ves en la pagina-->
+            <!--Logo Django-->
+            <img src="{% static 'images/logo.png' %}" />
+            <h1>Sitio web con Django</h1>
+        </div>
+    </header>
+
+    <nav>
+        <ul>
+            <li>
+                <!--<a href="/inicio">Inicio</a> Utiliza el nombre de la URL. Si se cambia el nombre de la URL en urls.py, tendria que modificar la plantilla-->
+                <a href="{% url 'inicio' %}">Inicio</a> <!--Utiliza el name de la URL. Si se cambia la URL en urls.py ya no habra problema con la plantila-->
+            </li>
+            <li>
+                <!--<a href="/contacto-dos">Contacto</a> Utiliza el nombre de la URL. Si se cambia el nombre de la URL en urls.py, tendria que modificar la plantilla-->
+                <a href="{% url 'articulos' %}">Articulos</a> <!--Utiliza el name de la URL. Si se cambia la URL en urls.py ya no habra problema con la plantila-->
+            </li>
+            <li>
+                <!--<a href="/contacto-dos">Contacto</a> Utiliza el nombre de la URL. Si se cambia el nombre de la URL en urls.py, tendria que modificar la plantilla-->
+                <a href="{% url 'create' %}">Crear articulo-FORM/SIN CLASS</a> <!--Utiliza el name de la URL. Si se cambia la URL en urls.py ya no habra problema con la plantila-->
+            </li>
+            <li>
+                <!--<a href="/contacto-dos">Contacto</a> Utiliza el nombre de la URL. Si se cambia el nombre de la URL en urls.py, tendria que modificar la plantilla-->
+                <a href="{% url 'create_full' %}">Crear articulo-FORMU/CON CLASS</a> <!--Utiliza el name de la URL. Si se cambia la URL en urls.py ya no habra problema con la plantila-->
+            </li>
+            <li>
+                <!--<a href="/hola-mundo">Hola Mundo</a> Utiliza el nombre de la URL. Si se cambia el nombre de la URL en urls.py, tendria que modificar la plantilla-->
+                <a href="{% url 'hola_mundo' %}">Hola Mundo</a> <!--Utiliza el name de la URL. Si se cambia la URL en urls.py ya no habra problema con la plantila-->
+            </li>
+            <li>
+                <!--<a href="/pagina-pruebas">Pagina de pruebas</a> Utiliza el nombre de la URL. Si se cambia el nombre de la URL en urls.py, tendria que modificar la plantilla-->
+                <a href="{% url 'pagina' %}">Pagina de pruebas</a> <!--Utiliza el name de la URL. Si se cambia la URL en urls.py ya no habra problema con la plantila-->
+            </li>
+            <li>
+                <!--<a href="/contacto-dos">Contacto</a> Utiliza el nombre de la URL. Si se cambia el nombre de la URL en urls.py, tendria que modificar la plantilla-->
+                <a href="{% url 'contacto' nombre='Mijail' apellidos='Zavala' %}">Contacto-LAYOUT EN VIEWS</a> <!--Utiliza el name de la URL. Si se cambia la URL en urls.py ya no habra problema con la plantila-->
+            </li>
+        </ul>   
+    </nav>
+    <!--Se crea la div para crear el efecto 3D-->
+    <div class="barra">
+        <span class="esquina-izquierda"></span> <!--span es una etiqueta vacia-->
+        <span class="relleno-barra"></span>
+        <span class="esquina-derecha"></span>
+    </div>
+
+    <div id="content"> <!--Para que layout.html se utilice siempre, es mejor crear un bloque de codigo-->
+        
+        <div class="box">
+            {% block content %} <!--Definir bloque-->
+               <strong>Contenido del bloque original</strong><!--Codigo que viene de tamplates/ En este caso es un contenido predefinido hola_mundo.html--> 
+            {% endblock %} <!--Cerrar bloque-->
+        </div>
+
+    </div>
+    
+    <footer>
+        &copy; 2022 por MIDEZA - {% now "d/m/Y h:m:s" %}
+    </footer>
+</body>
+</html>

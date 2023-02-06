@@ -1,0 +1,42 @@
+{% for article in articles %}
+
+            <article class="article-item">
+
+                <!--VISUALIZAR LAS IMAGENES EN LA PANTALLA-->
+                {% if article.image != 'null' and article.image.url|length >= 1 %} <!--.url automaticamente me saca la url de la imagen, automaticamente detecta que es un fichero-->
+                    
+                    <div class="image">
+                        <img src="{{article.image.url}}"/>
+                    </div>
+
+                {% endif %}
+
+                <div class="data">
+                    <h2>
+                        <a href="{% url 'article' article.id %}">{{article.title}}</a>
+                    </h2>
+                    <p>
+                        {% for category in article.categories.all %} <!--.all Saca todos lo datos de la relación ManyToMany que se hizo en models.py-->
+                            <a href="{% url 'category' category.id %}">{{category.name}}</a>
+
+                            {% if forloop.counter < article.categories.all|length  %} <!--forloop.counter saca el indice del elemento que se esta recorriendo | SE COMPRUEBA QUE EL counter ES MENOR AL NUMERO TOTAL DE CATEGORIAS-->
+                                {{'-'}}
+                            {% endif %}
+                        
+                        {% endfor %}
+                    </p>
+                    <span class="date">
+                        {{article.user.first_name}} {{article.user.last_name}} <!--Mostrar el nombre y el apellido de usuario registrado en el Panel de Administracion-->
+                        |
+                        {{article.created_at}}
+                    </span>
+                    
+                    <p>
+                        {{article.content|safe}}
+                    </p>
+                </div>
+
+                <div class="clearfix"></div>
+
+            </article>
+{% endfor %}

@@ -1,0 +1,58 @@
+{% extends 'layout.html' %} <!--Heredar toda la plantilla layout.html-->
+
+<!--Para que el titulo se muestre en la pagina, SE DEBE USAR EL BLOQUE EN EL layout.html-->
+{% block title%}
+
+    Listado de articulos
+
+{% endblock %}
+
+<!--Para que el contenido se muestre en la pagina, SE DEBE USAR EL BLOQUE EN EL layout.html-->
+{% block content %}
+
+    <h1 class="title">Listado de articulos</h1>
+    
+    <!--EVALUAR SI EXISTEN MENSAJES FLASH-->
+    {% if messages %}
+
+        {% for message in messages %}
+            <div class="mensaje">
+                {{message}}
+            </div>
+        {% endfor %}
+
+    {% endif %}
+
+    
+    {% for articulo in articulos %}
+
+            <article class="article-item">
+
+                <!--VISUALIZAR LAS IMAGENES EN LA PANTALLA-->
+                {% if articulo.image != 'null' and articulo.image.url|length >= 1 %} <!--.url automaticamente me saca la url de la imagen, automaticamente detecta que es un fichero-->
+                    
+                    <div class="image">
+                        <img src="{{articulo.image.url}}"/>
+                    </div>
+
+                {% endif %}
+
+                <div class="data">
+                    <h2>{{articulo.title}}</h2>
+                    <span class="date">{{articulo.created_at}}</span>
+                    
+                    <p>
+                        {{articulo.content}}
+                        
+                        <a href="{% url 'borrar' id=articulo.id %}" class="btn">Eliminar</a>
+                    </p>
+                </div>
+
+                <div class="clearfix"></div>
+
+            </article>
+
+    {% endfor %}
+
+{% endblock %}
+

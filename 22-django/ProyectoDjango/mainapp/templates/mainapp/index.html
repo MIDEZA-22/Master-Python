@@ -1,0 +1,35 @@
+{% extends 'layouts/layout.html' %}
+
+    {% block title %}
+        {{title}}
+    {% endblock %}
+
+    {% block content %} 
+        <h1>{{title}}</h1>
+        <hr/>
+        
+        {% if messages %}
+            {% for message in messages  %}
+                <div class="messages">
+            {% if messages %}
+                {% for message in messages  %}
+                    <div class="alert alert-success">
+                        {{message}}
+                    </div>
+                {% endfor %}  
+            {% endif %}">
+                    {{message}}
+                </div>
+            {% endfor %}  
+        {% endif %}
+
+        <!--Mostrar enlaces, para los usuarios registrados-->
+        {% if user.email %}
+            <h2>Bienvenido {{request.user.first_name}} {{user.last_name}}</h2>
+            <p>
+                {{user.email}}
+            </p>
+        {% else %}
+            <h2>Identificate para ver la pagina completa</h2>
+        {% endif %}
+    {% endblock %}

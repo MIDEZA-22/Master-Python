@@ -1,0 +1,15 @@
+<div class="pagination">
+    {% if articles.has_previous %} <!--Comprobar si se tiene mas articulos previamente. Comprobar si se tiene que imprimir el boton de anterior o no-->
+        <a href="?page=1">&laquo; Primero</a> <!--&laquo; Imprime la figura de una flecha hacia la derecha-->
+        <a href="?page={{articles.previous_page_number}}">Anterior</a>
+    {% endif %}
+
+    <span class="actual">
+        Pagina {{articles.number}} de {{articles.paginator.num_pages}}
+    </span>
+
+    {% if articles.has_next %} <!--Comprobar si se tiene mas articulos despues. Comprobar si se tiene que imprimir el boton de despues o no-->
+        <a href="?page={{articles.next_page_number}}">Siguiente</a>
+        <a href="?page={{articles.paginator.num_pages}}">Ultima &raquo;</a> <!--&raquo; Imprime la figura de una flecha hacia la izquierda-->  
+        {% endif %}
+</div>

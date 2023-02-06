@@ -1,0 +1,8 @@
+<!--USO DEL FOR-->
+<h2>Listado de personas</h2>
+<ul>
+    {% for persona in personas %}
+        <li>{{loop.index}} {{persona}}</li> <!--{{loop.index}} extrae el índice de cada elemento-->
+    {% endfor %}
+</ul>
+<hr/>

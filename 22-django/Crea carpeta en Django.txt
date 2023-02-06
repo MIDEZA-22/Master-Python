@@ -1,0 +1,163 @@
+
+------------------- CONFIGURACIONES HECHAS DENTRO DE LA CARPETA DE DJANGO/AprendiendoDjango-------------------------
+
+PARA INSTALAR DJANGO POR CMD:
+
+Pegar el siguiente código en el cmd: pip install Django==3.0.5
+
+
+
+1- CREAR UNA CARPETA COMPLETA PARA LA "CREACION DE UN PROYECTO" (startproject)
+
+    TODO DENTRO DEL CMD:
+
+    1- C:\Máster en Python\22-django> (Buscar la dirección)
+    2- django-admin startproject AprendiendoDjango (Pegar el código)
+
+    DEBERIA QUEDAR ASI:
+
+    C:\Máster en Python\22-django>django-admin startproject AprendiendoDjango
+ 
+2- CORRER EL SERVIDOR PARA QUE SE CREE LA BD "db.sqlite3" DE MANERA AUTOMATICA
+
+    TODO DENTRO DEL CMD:
+    1- C:\Máster en Python\22-django\AprendiendoDjango\AprendiendoDjango> (Buscar la dirección)
+    2- python manage.py runserver (Pegar el código)
+
+    DEBERIA QUEDAR ASI:
+
+    C:\Máster en Python\22-django\AprendiendoDjango\AprendiendoDjango>python manage.py runserver
+
+    NOTA: 
+    1- Pegar el servidor (http://127.0.0.1:8000/) en google
+    2- En todo momento debe estar abierto el CMD (segundo plano) para que el SERVIDOR DE DJANGO FUNCIONE
+
+¿QUE ES UNA APP?
+Es un paquete dentro de un proyecto de Django y todos estos paquetes formaran el proyecto en general
+Las APP por separado, tendra una funcionalidad propia
+
+3- CREAR LA APP:
+
+    TODO DENTRO DEL CMD:
+
+    1- C:\Máster en Python\22-django\AprendiendoDjango\AprendiendoDjango> (Buscar la dirección)
+    2- python manage.py startapp miapp (Pegar el código)
+
+    DEBERIA QUEDAR ASI:
+
+    C:\Máster en Python\22-django\AprendiendoDjango\AprendiendoDjango>python manage.py startapp miapp
+
+4- En settings.py se agrega "miapp" para que Django lo reconosca como una aplicacion
+5- Se crea la caperta "templates" (dentro de miapp) 
+6- Se crea la carpeta "static"(nombre por defecto) y dentro el se creara la carpeta "css" e "images" para maquetar la pagina (dentro de miapp) 
+7- Crear la "layout.html" dentro de la carpeta "templates"
+8- Se crea las VISTAS en views.py
+9- Se crea las diferentes plantillas dentro de la carpeta "templates"
+10- Se crea las URLs en urls.py
+
+11- INSTALAR EL "PYLINT" PARA DJANGO POR CMD (Para identificar mejor los errores)
+
+    1.pip install pylint-django
+    2.Para que se reconosca bien el codigo Django, hacer los siguiente:
+        - Ctrl + ,
+        - Buscar en "Usuario" la pestaña de Extensiones
+        - Ubicar "Python> Linting: Pylint Path" y escribir lo siguiente: pylint_django
+
+12- CREAR LOS MODELOS DENTRO DE models.py (Creacion de la BD)
+
+13- CREAR LAS MIGRACIONES (Coger los dos modelos, ver si anteriormente se tenia una migracion creada o no. En base a ello
+se creara un fichero de migracion en el cual se van a ejecutar todos los cambios de la BD)
+
+    TODO DENTRO DEL CMD:
+
+    1- C:\Máster en Python\22-django\AprendiendoDjango\AprendiendoDjango> (Buscar la dirección)
+    2- python manage.py makemigrations miapp (Pegar el código) - Sino no se pone el nombre de la app al final, se ejecutaran TODAS las migraciones de TODAS las apps
+
+14- CREAR EL SQL
+
+    TODO DENTRO DEL CMD:
+
+    1- C:\Máster en Python\22-django\AprendiendoDjango\AprendiendoDjango> (Buscar la dirección)
+    2- python manage.py sqlmigrate miapp 0001 (Pegar el código)
+
+15- MIGRAR Y EJECUTAR EL SQL Y SE GUARDE EN LA BD
+
+    TODO DENTRO DEL CMD:
+
+    1- C:\Máster en Python\22-django\AprendiendoDjango\AprendiendoDjango> (Buscar la dirección)
+    2- python manage.py migrate (Pegar el código)
+
+16- UTILIZAR LOS MODELOS DENTRO DE views.py PARA CREAR OBJETOS Y TENER ACCESO A LA BD, PARA: ACTUALIZAR, BORRAR, LISTAR, ETC.
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------
+
+CREAR FORMULARIOS UTILIZANDO "CLASS (class)"
+
+1- Se crea el archivo "forms.py" dentro de la carpeta "miapp". Dentro de ella se creara las class(tabla) con sus respectivos campos.
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------
+
+CONFIGURACION DEL PANEL DE ADMINISTRACION "ADMIN"
+
+    CREAR UN SUPERUSER DENTRO DE DJANGO
+
+        TODO DENTRO DEL CMD:
+
+        1- CONTROL+C PARA CORTAR LA EJECUCION DE ESE momento
+        2- CLS PARA LIMPIAR LA CONSOLA
+        3- C:\Máster en Python\22-django\AprendiendoDjango\AprendiendoDjango> (Buscar la dirección)
+        4- py manage.py createsuperuser (Pegar el código)
+        5- INGRESAR EL NOMBRE DE USUARIO,CORREO, CONTRASEÑA Y CONFIRMAR CONTRASEÑA (mijail-mideza1993)
+        6- ARRANCAR NUEVAMENTE EL SERVIDOR
+
+    REGISTRAR(PARA QUE EL PANEL DE ADMINISTRACION, RECONOSCA NUESTROS MODELOS) Y CAMBIAR, TRADUCIR, PONER EN SINGULAR EL NOMBRE DE LAS CLASES (TABLAS) Y CAMPOS DENTRO DE models.py
+
+        1- INGRESAR AQUI: http://127.0.0.1:8000/admin/ Y REGISTRARSE CON EL USUARIO QUE SE CREO COMO SUPERUSER
+        2- IMPORTAR LOS MODELOS (from .models import Article, Category) Y REGISTRAR LAS TABLAS (Article/Category) DENTRO DE admin.py 
+        3- REALIZAR LA CONFIGURACION DEL PANEL DE ADMINISTRACION MEDIANTE LA "class meta:" DENTRO DE "models.py" 
+
+    CAMBIAR EL NOMBRE DE LA APP QUE CREAMOS AL INICIO (miapp) PARA MOSTRARLO POR EL PANEL DE ADMINISTRACION(SOLO SI SE DESEA CAMBIARLO)
+
+        1- DENTRO DE app.py COLOCAR LO SIGUIENTE: verbose_name = "Mi primerta aplicación". SE COLOCA EL verbose_name Y EL NOMBRE QUE SE DESEA CAMBIARLO
+        2- DENTRO DE "settings.py" SE PUSO EL NOMBRE DE NUESTRA APP ('miapp') PARA QUE DJANGO RECONOSCA QUE ES UNA APLICACION. AHORA SE LE COLOCARA SEGUIDAMENTE ESTO: '.apps.MiappConfig'. DBERIA QUEDAR ASI: 'miapp.apps.MiappConfig'
+        
+    CAMBIAR LOS NOMBRES QUE ESTAN EN LA LISTA DE ARTICULO (NOMBRE POR DEFECTO=Article object (55)) DEL PANEL DE ADMINISTRACION
+
+        1- DENTRO DE "models.py" Y DENTRO DE LA "class Article "CREAR LA FUNCION: "def__str__(self):" Y DENTRO DEL def COLOCAR EL return CON LO QUE SE DESEE. EN ESTE CASO COLOQUE: "return f"{self.title} creado el {self.created_at} ({self.public})""
+        2- SI SE DESEA CAMBIAR EL NOMBRE DE LA LISTA DE CATEGORIA (NOMBRE POR DEFECTO=Category object (1)) HACER LOS MISMOS PASOS
+
+    MOSTRAR CAMPOS QUE SOLO SE PUEDEN LEER (created_at , update_at) DENTRO DE ARTICULO | PANEL DE ADMINISTRACION
+
+        1- CREAR UNA CLASS(class ArticleAdmin(admin.ModelAdmin)) DENTRO admin.py Y LUEGO PASARLE COMO PARAMETRO EL NOMBRE DE LA CLASE(ArticleAdmin) AL admin.site.register(Article, ArticleAdmin)
+        2- SI SE DESEA CAMBIAR EL NOMBRE DE LOS CAMPOS DE SOLO LECTURA (created_at , update_at), DIRIGIRSE A models.py. DENTRO DE LA class Article DIRIGIRSE A: created_at Y update_at Y COLOCAR COMO PARAMETRO EL verbose_name
+
+    CONFIGURAR DJANGO PARA SUBIR IMAGENES DESDE NUESTRO PANEL DE ADMNISTRACION
+
+        1- CREAR UNA CARPETA LLAMADA media DENTRO DEL PROYECTO GENERAL(AprendiendoDjango)
+        2- REALIZAR LA CONFIGURACION EN settings.py EN LA PARTE ULTIMA(# Media files)
+        3- AGREGAR COMO PARAMETRO "upload_to="articles"" DENTRO DEL CAMPO "image" DENTRO DE models.py/class Article, PARA QUE GENERE UNA CARPETA LLAMADA "articles" DENTRO DE LA CARPETA "media"
+        4- CORTAR LA EJECUCION DEL SERVIDOR, EN CASO ESTE EJECUTANDO (Ctrl+C)
+        5- INSTALAR EL PAQUETE PILLOW POR EL CMD PARA QUE DJANGO NOS PERMITA SUBIR IMAGENES (pip install Pillow)
+        6- REALIZAR LA CONFIGURACION PARA CARGAR LAS IMAGENES EN "urls.py" (LA urls.py GENERAL, NO EL DE LAS APPS)
+            6.1- IMPORTAR LOS SETTINGS QUE SE HIZO CON RESPETO A LA IMAGEN(from django.conf import settings) PARA ACCEDER A LA CONFIGURACION
+            6.2- REALIZAR LA CONDICION SI ESTAMOS EN MODO PRODUCCION O NO. EN CASO QUE NO "DEBUG=True" (SE ESTA EJECUTANDO EL PROGRAMA EN LOCAL), LA CONDICION SERA ESTA: "if settings.DEBUG:". EN CASO QUE SI, YA NO SERA NECESARIO LA CONDICION PORQUE LA URL FUNCIONARA DIRECTAMENTE
+        7- PARA VISUALIZAR LAS IMAGENES EN LA PANTALLA, AGREGAR CODIGO EN LA TEMPLATE articulos.html (VISUALIZAR LAS IMAGENES EN LA PANTALLA)
+        8- DARLE ESTILO A LA TEMPLATE articulos.html MEDIANTE EL css
+
+    CAMBIAR EL NOMBRE DEL TITULO DEL PANEL DE ADMINISTRACION (Administracion de Django), EL NOMBRE DE LA PESTAÑA DE LA VENTANA (Sitio administrativo|Sitio de administracion de Django) Y EL NOMBRE DEL SUBTITULO DEL PANEL DE ADMINISTRACION (Sitio administrativo)
+
+        1- DENTRO DE admin.py REALIZAR LOS CAMBIOS DE NOMBRE DEL TITULO, NOMBRE DE LA PESTAÑA Y EL NOMBRE DEL SUBTITULO
+    
+------------------- CONFIGURACIONES HECHAS DENTRO DE LA CARPETA DE DJANGO/ProyectoDjango-------------------------
+
+USAR EDITOR DE TEXTO ENRIQUECIDO
+
+    TODO DENTRO DEL CMD:
+
+        1- C:\Máster en Python\22-django\ProyectoDjango> (Buscar la dirección)
+        2- pip install django-ckeditor (Pegar el código)
+
+CONFIGURAR CKEDITOR 
+
+    1- Entrar al siguiente link: https://django-ckeditor.readthedocs.io/en/latest/
+    2- Dirigirse a la sección "Optional - customizing CKEditor editor" de la pagina. Copiar el "CKEDITOR_CONFIGS" que se desee usar y luego pegarlo en "settings.py"(EN CUALQUIER PARTE)

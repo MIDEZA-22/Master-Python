@@ -1,0 +1,25 @@
+---- INSTALACIÓN DE FLASK----
+
+    1-  VERIFICAR SI TENEMOS INSTALADOS PYTHON DENTRO DEL CMD (EN CASO QUE NO, NO FUNCIONARA)
+        - python --version
+    
+    2- INSTALAR FLASK DENTRO DEL CMD
+        -pip install Flask
+
+---- ARRANCAR EL SERVIDOR DE FLASK----
+
+    1-  UBICARNOS DENTRO DE NUESTRO PROYECTO
+        - C:\Master en Python\23-flask>
+    
+    2- INSERTAR EL SIGUIENTE CÓDIGO
+        - python main.py
+        - Deberia de  quedar así: C:\Master en Python\23-flask>python main.py
+
+---- CONEXIÓN FLASK-MYSQLDB----
+
+    1-  UBICARNOS DENTRO DE NUESTRO PROYECTO
+        - C:\Master en Python\23-flask>
+
+     2- INSERTAR EL SIGUIENTE CÓDIGO
+        - pip install flask-mysqldb
+        - Deberia de  quedar así: C:\Master en Python\23-flask>pip install flask-mysqldb
